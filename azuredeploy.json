@@ -147,7 +147,7 @@
             "type": "microsoft.insights/components",
             "apiVersion": "2015-05-01",
             "name": "[variables('appInsightsName')]",
-            "location": "[resourceGroup().location)",
+            "location": "[resourceGroup().location]",
             "tags": {
                 "applicationType": "web",
                 "applicationName": "[variables('websiteName')]"
