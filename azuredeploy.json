@@ -106,7 +106,8 @@
         "storageAccountName": "[concat(parameters('resourcePrefix'), 'storage')]",
         "searchServiceName": "[concat(parameters('resourcePrefix'), '-search-service')]",
         "hostingPlanName": "[concat(parameters('resourcePrefix'), '-plan')]",
-        "cognitiveServicesAccountName": "[concat(parameters('resourcePrefix'), '-cognitive-services')]"
+        "cognitiveServicesAccountName": "[concat(parameters('resourcePrefix'), '-cognitive-services')]",
+        "functionAppName":"[concat(parameters('resourcePrefix'), '-function-app')]"
     },
     "resources": [
         {
@@ -176,6 +177,40 @@
             "kind": "CognitiveServices",
             "location": "[parameters('searchServiceAndCognitiveServicesLocation')]",
             "properties": {}
+        },
+        {
+            "apiVersion": "2016-03-01",
+            "type": "Microsoft.Web/sites",
+            "name": "[variables('functionAppName')]",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ],
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountid'),'2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "node"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "10.14.1"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~2"
+                        }
+                    ]
+                }
+            }
         }
     ],
     "outputs": {
