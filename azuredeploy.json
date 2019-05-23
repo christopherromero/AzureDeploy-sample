@@ -225,34 +225,5 @@
             }
         }
     ],
-    "outputs": {
-        "Search Service Name": {
-            "type": "string",
-            "value": "[variables('searchServiceName')]"
-        },
-        "Search Service Api Key": {
-            "type": "string",
-            "value": "[listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceName')), '2015-08-19').primaryKey]"
-        },
-        "Cognitive Services Account Key": {
-            "type": "string",
-            "value": "[listkeys(resourceId('Microsoft.CognitiveServices/accounts', variables('cognitiveServicesAccountName')), '2017-04-18').key1]"
-        },
-        "Blob Storage Account Connection String": {
-            "type": "string",
-            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1, ';')]"
-        },
-        "Azure Web App Site Name": {
-            "type": "string",
-            "value": "[variables('websiteName')]"
-        },
-        "Azure Web App Username": {
-            "type": "string",
-            "value": "[list(concat('Microsoft.Web/sites/', variables('websiteName'), '/config/publishingcredentials'), '2016-08-01').properties.publishingUserName]"
-        },
-        "Azure Web App Password": {
-            "type": "string",
-            "value": "[list(concat('Microsoft.Web/sites/', variables('websiteName'), '/config/publishingcredentials'), '2016-08-01').properties.publishingPassword]"
-        }
-    }
+    "outputs": {}
 }
