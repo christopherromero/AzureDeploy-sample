@@ -2,10 +2,10 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "resourcePrefix": {
+        "repoURL": {
             "type": "string",
             "metadata": {
-                "description": "Prefix for all resources created by this template (less than 13 characters)" 
+                "description": "The URL for the GitHub repository that contains the project to deploy."
             }
         },
         "branch": {
@@ -13,6 +13,33 @@
             "defaultValue": "master",
             "metadata": {
                 "description": "The branch of the GitHub repository to use."
+            }
+        },
+        "resourcePrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Prefix for all resources created by this template (less than 13 characters)" 
+            }
+        },
+        "hostingPlanSku": {
+            "type": "string",
+            "defaultValue": "F1",
+            "allowedValues": [
+                "F1",
+                "D1",
+                "B1",
+                "B2",
+                "B3",
+                "S1",
+                "S2",
+                "S3",
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+            ],
+            "metadata": {
+                "description": "The pricing tier for the App Service plan"
             }
         }
     },
