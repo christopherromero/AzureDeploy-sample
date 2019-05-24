@@ -120,6 +120,18 @@
                 "name": "[parameters('storageAccountType')]",
                 "tier": "Standard"
             }
+        },
+        {
+            "apiVersion": "2016-08-01",
+            "name": "[variables('websiteName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
+            ],
+            "properties": {
+                "serverFarmId": "[variables('hostingPlanName')]"
+            }
         }
     ]
 }
