@@ -5,7 +5,7 @@
         "resourcePrefix": {
             "type": "string",
             "metadata": {
-                "description": "Prefix for all resources created by this template (less than 13 characters)" 
+                "description": "provide a 2-13 character prefix for all resources."
             }
         },
         "storageAccountName": {
