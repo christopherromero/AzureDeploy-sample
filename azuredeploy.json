@@ -146,6 +146,15 @@
             "properties": {
                 "Application_Type": "web"
             }
+        },
+        {
+            "apiVersion": "2015-08-19",
+            "name": "[variables('searchServiceName')]",
+            "type": "Microsoft.Search/searchServices",
+            "location": "[parameters('searchServiceAndCognitiveServicesLocation')]",
+            "sku": {
+                "name": "[parameters('searchServiceSku')]"
+            }
         }
         
     ]
