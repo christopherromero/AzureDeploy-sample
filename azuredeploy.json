@@ -155,6 +155,18 @@
             "sku": {
                 "name": "[parameters('searchServiceSku')]"
             }
-        }     
+        },
+        {
+            "name": "[variables('cognitiveServicesAccountName')]",
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2017-04-18",
+            "sku": {
+              "name": "S0"
+            },
+            "kind": "CognitiveServices",
+            "location": "[parameters('searchServiceAndCognitiveServicesLocation')]",
+            "properties": {}
+        }
+
     ]
 }
