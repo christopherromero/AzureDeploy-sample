@@ -2,75 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "repoURL": {
+            "type": "string",
+            "metadata": {
+                "description": "The URL for the GitHub repository that contains the project to deploy."
+            }
+        },
+        "branch":{
+            "type": "string",
+            "defaultValue" : "master",
+            "metadata": {
+                "description": "The branch of the GitHub repository to use."
+            }
+        },
         "resourcePrefix": {
             "type": "string",
             "metadata": {
                 "description": "Prefix for all resources created by this template (less than 13 characters)" 
-            }
-        },
-        "hostingPlanSku": {
-            "type": "string",
-            "defaultValue": "F1",
-            "allowedValues": [
-                "F1",
-                "D1",
-                "B1",
-                "B2",
-                "B3",
-                "S1",
-                "S2",
-                "S3",
-                "P1",
-                "P2",
-                "P3",
-                "P4"
-            ],
-            "metadata": {
-                "description": "The pricing tier for the App Service plan"
-            }
-        },
-        "searchServiceSku": {
-            "type": "string",
-            "defaultValue": "basic",
-            "allowedValues": [
-                "free",
-                "basic",
-                "standard",
-                "standard2",
-                "standard3"
-            ],
-            "metadata": {
-                "description": "The SKU of the search service you want to create. E.g. free or standard"
-            }
-        },
-        "searchServiceAndCognitiveServicesLocation": {
-            "type": "string",
-            "defaultValue": "South Central US",
-            "allowedValues": [
-                "East Asia",
-                "Southeast Asia",
-                "Australia East",
-                "Brazil South",
-                "Canada Central",
-                "North Europe",
-                "West Europe",
-                "Central India",
-                "UK South",
-                "East US",
-                "East US 2",
-                "Central US",
-                "North Central US",
-                "South Central US",
-                "West Central US",
-                "West US",
-                "West US 2",
-                "Japan East",
-                "Japan West",
-                "Korea Central",
-                "France Central"
-            ],
-            "metadata": {
-                "description": "Location where the Azure Search service and Cognitive Services account will be deployed."
             }
         },
         "storageAccountType": {
@@ -85,38 +33,24 @@
             "metadata": {
                 "description": "Storage Account type"
             }
-        },
-        "repoURL": {
-            "type": "string",
-            "metadata": {
-                "description": "The URL for the GitHub repository that contains the project to deploy."
-            }
-        },
-        "branch": {
-            "type": "string",
-            "defaultValue": "master",
-            "metadata": {
-                "description": "The branch of the GitHub repository to use."
-            }
         }
     },
     "variables": {
-        "hostingPlanName": "[concat(parameters('resourcePrefix'), '-plan')]"
-
+        "storageAccountName": "[concat(parameters('resourcePrefix'), 'storage')]",
+        "storageAccountId":"[concat(parameters('resourcePrefix'))]"
     },
     "resources": [
         {
-            "apiVersion": "2016-09-01",
-            "name": "[variables('hostingPlanName')]",
-            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2017-10-01",
+            "name": "[variables('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
             "location": "[resourceGroup().location]",
             "sku": {
-                "name": "[parameters('hostingPlanSku')]"
+                "name": "[parameters('storageAccountType')]"
             },
-            "properties": {
-                "name": "[variables('hostingPlanName')]"
-            }
+            "kind": "Storage"
         }
     ],
-    "outputs": {}
-}
+    "outputs": {
+    }
+  }
