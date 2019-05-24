@@ -155,7 +155,6 @@
             "sku": {
                 "name": "[parameters('searchServiceSku')]"
             }
-        }
-        
+        }     
     ]
 }
