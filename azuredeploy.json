@@ -35,6 +35,16 @@
             }
         }
     },
+    "variables": {
+        "hostingPlanName": "[concat(parameters('resourcePrefix'), '-plan')]",
+        "storageAccountName": "[concat(parameters('resourcePrefix'), 'storage')]",
+        "websiteName": "[concat(parameters('resourcePrefix'), '-site')]",
+        "appInsightsName": "[concat(parameters('resourcePrefix'), '-app-insights')]",
+        "searchServiceName": "[concat(parameters('resourcePrefix'), '-search-service')]",
+        "cognitiveServicesAccountName": "[concat(parameters('resourcePrefix'), '-cognitive-services')]",
+        "functionAppName":"[concat(parameters('resourcePrefix'), '-function-app')]",
+        "storageAccountId":"[concat(parameters('resourcePrefix'))]"
+    },
     "resources": [
         {
             "name": "[parameters('storageAccountName')]",
