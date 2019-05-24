@@ -2,6 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "resourcePrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Prefix for all resources created by this template (less than 13 characters)" 
+            }
+        },
         "storageAccountName": {
             "type": "string",
             "metadata": {
@@ -28,6 +34,9 @@
                 "description": "Storage Account type"
             }
         }
+    },
+    "variable" : {
+
     },
     "resources": [
         {
